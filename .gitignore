@@ -1,0 +1,66 @@
+# ALWAYS IGNORE (build and tooling)
+build/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+*.iml
+coverage/
+
+# ALWAYS IGNORE (Android generated)
+android/.gradle/
+android/local.properties
+android/key.properties
+android/app/debug.keystore
+android/app/src/main/java/io/flutter/plugins/
+
+# DO NOT IGNORE iOS YET
+# iOS - uncomment when iOS is added
+# ios/.symlinks/
+# ios/Flutter/App.framework
+# ios/Flutter/Flutter.framework
+# ios/Flutter/Generated.xcconfig
+# ios/Flutter/flutter_assets/
+# ios/Runner/GeneratedPluginRegistrant.*
+
+# ALWAYS IGNORE (sensitive data)
+*.vlt
+.env
+*.env
+secrets/
+*.keystore
+*.jks
+key.properties
+
+# ALWAYS IGNORE (OS files)
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# ALWAYS IGNORE (IDE files)
+.idea/
+.vscode/
+*.iml
+
+# IGNORE THESE INTERNAL DOCS
+ARCHITECTURE.md
+auth_notes.md
+crypto_notes.md
+DECISIONS.md
+generator_notes.md
+phase_1_report.md
+phase_2_report.md
+phase_3_report.md
+phase_4_report.md
+phase_5_report.md
+phase_6_report.md
+phase_7_report.md
+phase_8_report.md
+PROGRESS.md
+security_audit.md
+transfer_notes.md
+ui_notes.md
+vault_notes.md
