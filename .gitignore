@@ -7,6 +7,8 @@ build/
 .pub-cache/
 .pub/
 *.iml
+*.aar
+*.dill
 coverage/
 
 # ALWAYS IGNORE (Android generated)
