@@ -1,5 +1,5 @@
-name: vaultx
-description: VaultX - A zero-knowledge, fully offline password manager with military-grade encryption.
+name: kryptix
+description: Kryptix - A zero-knowledge, fully offline password manager with military-grade encryption.
 publish_to: 'none'
 
 version: 0.1.0+1

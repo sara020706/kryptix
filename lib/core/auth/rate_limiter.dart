@@ -10,8 +10,8 @@ class RateLimiter {
   static const int _thresholdWrong3 = 10;
   static const int _delayMs3 = 300000;
 
-  static const String _wrongAttemptsKey = 'vaultx_wrong_attempts';
-  static const String _lastWrongAttemptTimeKey = 'vaultx_last_wrong_attempt_time';
+  static const String _wrongAttemptsKey = 'kryptix_wrong_attempts';
+  static const String _lastWrongAttemptTimeKey = 'kryptix_last_wrong_attempt_time';
 
   final FlutterSecureStorage _storage;
 

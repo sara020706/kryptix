@@ -1,4 +1,4 @@
-import 'package:vaultx/core/crypto/random.dart' as vault_random;
+import 'package:kryptix/core/crypto/random.dart' as vault_random;
 
 class PasswordGenerator {
   static const int minLength = 8;

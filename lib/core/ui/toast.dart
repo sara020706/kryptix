@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-enum VaultXToastType { success, error, info, warning }
+enum KryptixToastType { success, error, info, warning }
 
-class VaultXToast {
+class KryptixToast {
   static OverlayEntry? _currentEntry;
   static Timer? _dismissTimer;
 
   static void show(
     BuildContext context, {
     required String message,
-    VaultXToastType type = VaultXToastType.info,
+    KryptixToastType type = KryptixToastType.info,
     Duration duration = const Duration(seconds: 3),
   }) {
     _dismissTimer?.cancel();
@@ -19,7 +19,7 @@ class VaultXToast {
 
     final overlay = Overlay.of(context);
     final entry = OverlayEntry(
-      builder: (ctx) => _VaultXToastWidget(
+      builder: (ctx) => _KryptixToastWidget(
         message: message,
         type: type,
         onDismiss: () {
@@ -45,22 +45,22 @@ class VaultXToast {
   }
 }
 
-class _VaultXToastWidget extends StatefulWidget {
+class _KryptixToastWidget extends StatefulWidget {
   final String message;
-  final VaultXToastType type;
+  final KryptixToastType type;
   final VoidCallback onDismiss;
 
-  const _VaultXToastWidget({
+  const _KryptixToastWidget({
     required this.message,
     required this.type,
     required this.onDismiss,
   });
 
   @override
-  State<_VaultXToastWidget> createState() => _VaultXToastWidgetState();
+  State<_KryptixToastWidget> createState() => _KryptixToastWidgetState();
 }
 
-class _VaultXToastWidgetState extends State<_VaultXToastWidget>
+class _KryptixToastWidgetState extends State<_KryptixToastWidget>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<Offset> _slideAnimation;
@@ -89,39 +89,39 @@ class _VaultXToastWidgetState extends State<_VaultXToastWidget>
 
   Color get _iconColor {
     switch (widget.type) {
-      case VaultXToastType.success:
+      case KryptixToastType.success:
         return const Color(0xFF4CAF50);
-      case VaultXToastType.error:
+      case KryptixToastType.error:
         return const Color(0xFFffb4ab);
-      case VaultXToastType.warning:
+      case KryptixToastType.warning:
         return const Color(0xFFFFB74D);
-      case VaultXToastType.info:
+      case KryptixToastType.info:
         return const Color(0xFFadc7ff);
     }
   }
 
   Color get _glowColor {
     switch (widget.type) {
-      case VaultXToastType.success:
+      case KryptixToastType.success:
         return const Color(0xFF4CAF50).withOpacity(0.3);
-      case VaultXToastType.error:
+      case KryptixToastType.error:
         return const Color(0xFFffb4ab).withOpacity(0.3);
-      case VaultXToastType.warning:
+      case KryptixToastType.warning:
         return const Color(0xFFFFB74D).withOpacity(0.3);
-      case VaultXToastType.info:
+      case KryptixToastType.info:
         return const Color(0xFFadc7ff).withOpacity(0.3);
     }
   }
 
   IconData get _icon {
     switch (widget.type) {
-      case VaultXToastType.success:
+      case KryptixToastType.success:
         return Icons.check_circle_outline_rounded;
-      case VaultXToastType.error:
+      case KryptixToastType.error:
         return Icons.error_outline_rounded;
-      case VaultXToastType.warning:
+      case KryptixToastType.warning:
         return Icons.warning_amber_rounded;
-      case VaultXToastType.info:
+      case KryptixToastType.info:
         return Icons.info_outline_rounded;
     }
   }

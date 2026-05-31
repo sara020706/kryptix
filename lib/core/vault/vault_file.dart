@@ -6,7 +6,7 @@ import '../models/entry_model.dart';
 
 class VaultFile {
   static const String currentVersion = '2.4.0';
-  static const String appName = 'VaultX';
+  static const String appName = 'Kryptix';
 
   static String createVaultJson({
     required List<EncryptedVaultEntry> entries,

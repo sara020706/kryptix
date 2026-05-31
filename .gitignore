@@ -45,22 +45,4 @@ Thumbs.db
 .vscode/
 *.iml
 
-# IGNORE THESE INTERNAL DOCS
-ARCHITECTURE.md
-auth_notes.md
-crypto_notes.md
-DECISIONS.md
-generator_notes.md
-phase_1_report.md
-phase_2_report.md
-phase_3_report.md
-phase_4_report.md
-phase_5_report.md
-phase_6_report.md
-phase_7_report.md
-phase_8_report.md
-PROGRESS.md
-security_audit.md
-transfer_notes.md
-ui_notes.md
-vault_notes.md
+

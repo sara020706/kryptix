@@ -172,7 +172,7 @@ class VaultTransfer {
     final now = DateTime.now();
     final timestamp =
         '${now.year}${now.month.toString().padLeft(2, '0')}${now.day.toString().padLeft(2, '0')}_${now.hour.toString().padLeft(2, '0')}${now.minute.toString().padLeft(2, '0')}';
-    return 'vaultx_backup_$timestamp.vlt';
+    return 'kryptix_backup_$timestamp.vlt';
   }
 
   static Future<TransferResult> saveVaultToFile({

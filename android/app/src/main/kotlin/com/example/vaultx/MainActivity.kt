@@ -1,4 +1,4 @@
-package com.example.vaultx
+package com.example.kryptix
 
 import io.flutter.embedding.android.FlutterFragmentActivity
 

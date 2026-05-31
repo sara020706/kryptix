@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vaultx/core/vault/vault_core.dart';
-import 'package:vaultx/core/vault/vault_file.dart';
-import 'package:vaultx/core/models/entry_model.dart';
+import 'package:kryptix/core/vault/vault_core.dart';
+import 'package:kryptix/core/vault/vault_file.dart';
+import 'package:kryptix/core/models/entry_model.dart';
 
 void main() {
   group('VaultModule', () {
@@ -19,7 +19,7 @@ void main() {
       expect(serialized, isNotEmpty);
       final jsonMap = jsonDecode(serialized) as Map<String, dynamic>;
       expect(jsonMap['version'], equals(VaultFile.currentVersion));
-      expect(jsonMap['app_name'], equals('VaultX'));
+      expect(jsonMap['app_name'], equals('Kryptix'));
       expect(jsonMap['argon2'], isNotNull);
       expect(jsonMap['verifier'], isNotEmpty);
       expect(jsonMap['hmac'], isNotEmpty);

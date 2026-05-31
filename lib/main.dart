@@ -10,11 +10,11 @@ import 'core/generator/password_generator.dart';
 import 'features/auth/auth_controller.dart';
 import 'features/settings/transfer_controller.dart';
 import 'features/generator/generator_controller.dart';
-import 'package:vaultx/core/auth/keystore.dart';
-import 'package:vaultx/core/auth/biometric.dart';
-import 'package:vaultx/core/auth/rate_limiter.dart';
-import 'package:vaultx/core/auth/auth_state.dart';
-import 'package:vaultx/core/storage/file_manager.dart';
+import 'package:kryptix/core/auth/keystore.dart';
+import 'package:kryptix/core/auth/biometric.dart';
+import 'package:kryptix/core/auth/rate_limiter.dart';
+import 'package:kryptix/core/auth/auth_state.dart';
+import 'package:kryptix/core/storage/file_manager.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:path_provider/path_provider.dart';
@@ -25,33 +25,33 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
-    runApp(const VaultXApp());
+    runApp(const KryptixApp());
   });
 }
 
-class VaultXApp extends StatelessWidget {
-  const VaultXApp({super.key});
+class KryptixApp extends StatelessWidget {
+  const KryptixApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Kryptix',
-      theme: VaultXTheme.getTheme(),
+      theme: KryptixTheme.getTheme(),
       themeMode: ThemeMode.dark,
-      home: const VaultXHome(),
+      home: const KryptixHome(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class VaultXHome extends StatefulWidget {
-  const VaultXHome({super.key});
+class KryptixHome extends StatefulWidget {
+  const KryptixHome({super.key});
 
   @override
-  State<VaultXHome> createState() => _VaultXHomeState();
+  State<KryptixHome> createState() => _KryptixHomeState();
 }
 
-class _VaultXHomeState extends State<VaultXHome>
+class _KryptixHomeState extends State<KryptixHome>
     with WidgetsBindingObserver {
   late VaultCore vault;
   late AuthController authController;
@@ -138,10 +138,10 @@ class _VaultXHomeState extends State<VaultXHome>
   Widget build(BuildContext context) {
     if (!isInitialized) {
       return const Scaffold(
-        backgroundColor: VaultXColors.background,
+        backgroundColor: KryptixColors.background,
         body: Center(
           child: CircularProgressIndicator(
-            color: VaultXColors.primary,
+            color: KryptixColors.primary,
           ),
         ),
       );
@@ -187,15 +187,15 @@ class _VaultXHomeState extends State<VaultXHome>
   }
 }
 
-class VaultXBackground extends StatelessWidget {
+class KryptixBackground extends StatelessWidget {
   final Widget child;
 
-  const VaultXBackground({required this.child, super.key});
+  const KryptixBackground({required this.child, super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: VaultXColors.background,
+      backgroundColor: KryptixColors.background,
       body: child,
     );
   }
@@ -263,10 +263,10 @@ class _SetupScreenState extends State<SetupScreen> {
 
   Future<void> _setupMasterPassword() async {
     if (passwordController.text.isEmpty || confirmController.text.isEmpty) {
-      VaultXToast.show(
+      KryptixToast.show(
         context,
         message: 'Please enter and confirm your password',
-        type: VaultXToastType.warning,
+        type: KryptixToastType.warning,
       );
       return;
     }
@@ -281,17 +281,17 @@ class _SetupScreenState extends State<SetupScreen> {
     if (mounted) {
       setState(() => isLoading = false);
       if (result.success) {
-        VaultXToast.show(
+        KryptixToast.show(
           context,
           message: 'Vault setup complete!',
-          type: VaultXToastType.success,
+          type: KryptixToastType.success,
         );
         widget.onSetupComplete();
       } else {
-        VaultXToast.show(
+        KryptixToast.show(
           context,
           message: result.message,
-          type: VaultXToastType.error,
+          type: KryptixToastType.error,
         );
       }
     }
@@ -299,7 +299,7 @@ class _SetupScreenState extends State<SetupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return VaultXBackground(
+    return KryptixBackground(
       child: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -321,7 +321,7 @@ class _SetupScreenState extends State<SetupScreen> {
               Text(
                 'High-level encryption active',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: VaultXColors.onSurfaceVariant.withOpacity(0.6),
+                      color: KryptixColors.onSurfaceVariant.withOpacity(0.6),
                     ),
               ),
               const SizedBox(height: 32),
@@ -338,14 +338,14 @@ class _SetupScreenState extends State<SetupScreen> {
                     Text(
                       'This password will encrypt your entire vault. Choose a strong password.',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: VaultXColors.onSurfaceVariant.withOpacity(0.8),
+                            color: KryptixColors.onSurfaceVariant.withOpacity(0.8),
                           ),
                     ),
                     const SizedBox(height: 24),
                     Text(
                       'MASTER PASSWORD',
                       style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                            color: VaultXColors.primary,
+                            color: KryptixColors.primary,
                             letterSpacing: 1.2,
                           ),
                     ),
@@ -369,7 +369,7 @@ class _SetupScreenState extends State<SetupScreen> {
                     Text(
                       'CONFIRM PASSWORD',
                       style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                            color: VaultXColors.primary,
+                            color: KryptixColors.primary,
                             letterSpacing: 1.2,
                           ),
                     ),
@@ -388,17 +388,17 @@ class _SetupScreenState extends State<SetupScreen> {
                     Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: VaultXColors.errorContainer.withOpacity(0.12),
+                        color: KryptixColors.errorContainer.withOpacity(0.12),
                         borderRadius: BorderRadius.circular(8),
                         border: Border.all(
-                          color: VaultXColors.error.withOpacity(0.25),
+                          color: KryptixColors.error.withOpacity(0.25),
                           width: 1,
                         ),
                       ),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Icon(Icons.warning_amber_rounded, color: VaultXColors.error, size: 18),
+                          const Icon(Icons.warning_amber_rounded, color: KryptixColors.error, size: 18),
                           const SizedBox(width: 8),
                           Expanded(
                             child: Column(
@@ -407,7 +407,7 @@ class _SetupScreenState extends State<SetupScreen> {
                                 Text(
                                   'ZERO-KNOWLEDGE DISCLOSURE',
                                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                                        color: VaultXColors.error,
+                                        color: KryptixColors.error,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 10,
                                         letterSpacing: 1.0,
@@ -418,7 +418,7 @@ class _SetupScreenState extends State<SetupScreen> {
                                   'Kryptix encrypts your entire database locally. We do not store or transmit your master password. If lost, your credentials can NEVER be recovered by anyone.',
                                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                                         fontSize: 11,
-                                        color: VaultXColors.onSurfaceVariant.withOpacity(0.8),
+                                        color: KryptixColors.onSurfaceVariant.withOpacity(0.8),
                                         height: 1.4,
                                       ),
                                 ),
@@ -437,8 +437,8 @@ class _SetupScreenState extends State<SetupScreen> {
                           width: 20,
                           child: Checkbox(
                             value: acceptSeriousness,
-                            activeColor: VaultXColors.primary,
-                            checkColor: VaultXColors.onPrimary,
+                            activeColor: KryptixColors.primary,
+                            checkColor: KryptixColors.onPrimary,
                             onChanged: (val) {
                               setState(() {
                                 acceptSeriousness = val ?? false;
@@ -459,8 +459,8 @@ class _SetupScreenState extends State<SetupScreen> {
                               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                                     fontSize: 12,
                                     color: acceptSeriousness
-                                        ? VaultXColors.onSurface
-                                        : VaultXColors.onSurfaceVariant.withOpacity(0.6),
+                                        ? KryptixColors.onSurface
+                                        : KryptixColors.onSurfaceVariant.withOpacity(0.6),
                                   ),
                             ),
                           ),
@@ -479,9 +479,9 @@ class _SetupScreenState extends State<SetupScreen> {
                           : Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text('Create Vault', style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold, color: VaultXColors.onPrimary)),
+                                Text('Create Vault', style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold, color: KryptixColors.onPrimary)),
                                 const SizedBox(width: 8),
-                                const Icon(Icons.arrow_forward, size: 20, color: VaultXColors.onPrimary),
+                                const Icon(Icons.arrow_forward, size: 20, color: KryptixColors.onPrimary),
                               ],
                             ),
                     ),
@@ -539,7 +539,7 @@ class _SetupScreenState extends State<SetupScreen> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text('Strength', style: TextStyle(fontSize: 12, color: VaultXColors.onSurfaceVariant)),
+            const Text('Strength', style: TextStyle(fontSize: 12, color: KryptixColors.onSurfaceVariant)),
             Text(label, style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: segmentColor)),
           ],
         ),
@@ -637,10 +637,10 @@ class _UnlockScreenState extends State<UnlockScreen> {
         }
       } else {
         if (mounted) {
-          VaultXToast.show(
+          KryptixToast.show(
             context,
             message: 'Biometric authentication failed or cancelled',
-            type: VaultXToastType.error,
+            type: KryptixToastType.error,
           );
         }
       }
@@ -660,7 +660,7 @@ class _UnlockScreenState extends State<UnlockScreen> {
       builder: (ctx) => AlertDialog(
         title: const Row(
           children: [
-            Icon(Icons.verified_user_outlined, color: VaultXColors.primary),
+            Icon(Icons.verified_user_outlined, color: KryptixColors.primary),
             SizedBox(width: 8),
             Text('Identity Verified'),
           ],
@@ -682,8 +682,8 @@ class _UnlockScreenState extends State<UnlockScreen> {
                     );
                   },
                   style: OutlinedButton.styleFrom(
-                    foregroundColor: VaultXColors.error,
-                    side: const BorderSide(color: VaultXColors.error),
+                    foregroundColor: KryptixColors.error,
+                    side: const BorderSide(color: KryptixColors.error),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                   ),
                   child: const Text('DELETE FRESH'),
@@ -697,8 +697,8 @@ class _UnlockScreenState extends State<UnlockScreen> {
                     _reuseVaultWithBiometrics();
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: VaultXColors.primary,
-                    foregroundColor: VaultXColors.onPrimary,
+                    backgroundColor: KryptixColors.primary,
+                    foregroundColor: KryptixColors.onPrimary,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                   ),
                   child: const Text('REUSE VAULT'),
@@ -726,20 +726,20 @@ class _UnlockScreenState extends State<UnlockScreen> {
           widget.authController.lockVault(); // lock immediate state until password is set
           _showNewPasswordPromptForReusedVault(existingEntries);
         } else {
-          VaultXToast.show(
+          KryptixToast.show(
             context,
             message: 'Failed to authenticate: ${result.message}',
-            type: VaultXToastType.error,
+            type: KryptixToastType.error,
           );
         }
       }
     } catch (e) {
       if (mounted) {
         setState(() => isLoading = false);
-        VaultXToast.show(
+        KryptixToast.show(
           context,
           message: 'Error unlocking: $e',
-          type: VaultXToastType.error,
+          type: KryptixToastType.error,
         );
       }
     }
@@ -759,7 +759,7 @@ class _UnlockScreenState extends State<UnlockScreen> {
         builder: (ctx, setDialogState) => AlertDialog(
           title: const Row(
             children: [
-              Icon(Icons.lock_reset, color: VaultXColors.primary),
+              Icon(Icons.lock_reset, color: KryptixColors.primary),
               SizedBox(width: 8),
               Expanded(
                 child: Text('Set New Master Password'),
@@ -779,7 +779,7 @@ class _UnlockScreenState extends State<UnlockScreen> {
                 Text(
                   'NEW MASTER PASSWORD',
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                        color: VaultXColors.primary,
+                        color: KryptixColors.primary,
                         letterSpacing: 1.2,
                       ),
                 ),
@@ -803,7 +803,7 @@ class _UnlockScreenState extends State<UnlockScreen> {
                 Text(
                   'CONFIRM MASTER PASSWORD',
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                        color: VaultXColors.primary,
+                        color: KryptixColors.primary,
                         letterSpacing: 1.2,
                       ),
                 ),
@@ -820,17 +820,17 @@ class _UnlockScreenState extends State<UnlockScreen> {
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: VaultXColors.errorContainer.withOpacity(0.12),
+                    color: KryptixColors.errorContainer.withOpacity(0.12),
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
-                      color: VaultXColors.error.withOpacity(0.25),
+                      color: KryptixColors.error.withOpacity(0.25),
                       width: 1,
                     ),
                   ),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Icon(Icons.warning_amber_rounded, color: VaultXColors.error, size: 18),
+                      const Icon(Icons.warning_amber_rounded, color: KryptixColors.error, size: 18),
                       const SizedBox(width: 8),
                       Expanded(
                         child: Column(
@@ -839,7 +839,7 @@ class _UnlockScreenState extends State<UnlockScreen> {
                             Text(
                               'ZERO-KNOWLEDGE DISCLOSURE',
                               style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                                    color: VaultXColors.error,
+                                    color: KryptixColors.error,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 10,
                                     letterSpacing: 1.0,
@@ -850,7 +850,7 @@ class _UnlockScreenState extends State<UnlockScreen> {
                               'Kryptix encrypts your entire database locally. We do not store or transmit your master password. If lost, your credentials can NEVER be recovered by anyone.',
                               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                                     fontSize: 11,
-                                    color: VaultXColors.onSurfaceVariant.withOpacity(0.8),
+                                    color: KryptixColors.onSurfaceVariant.withOpacity(0.8),
                                     height: 1.4,
                                   ),
                             ),
@@ -869,8 +869,8 @@ class _UnlockScreenState extends State<UnlockScreen> {
                       width: 20,
                       child: Checkbox(
                         value: acceptSeriousness,
-                        activeColor: VaultXColors.primary,
-                        checkColor: VaultXColors.onPrimary,
+                        activeColor: KryptixColors.primary,
+                        checkColor: KryptixColors.onPrimary,
                         onChanged: (val) {
                           setDialogState(() {
                             acceptSeriousness = val ?? false;
@@ -891,8 +891,8 @@ class _UnlockScreenState extends State<UnlockScreen> {
                           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                                 fontSize: 12,
                                 color: acceptSeriousness
-                                    ? VaultXColors.onSurface
-                                    : VaultXColors.onSurfaceVariant.withOpacity(0.6),
+                                    ? KryptixColors.onSurface
+                                    : KryptixColors.onSurfaceVariant.withOpacity(0.6),
                               ),
                         ),
                       ),
@@ -913,8 +913,8 @@ class _UnlockScreenState extends State<UnlockScreen> {
                       Navigator.pop(ctx);
                     },
                     style: OutlinedButton.styleFrom(
-                      foregroundColor: VaultXColors.primary,
-                      side: const BorderSide(color: VaultXColors.primary),
+                      foregroundColor: KryptixColors.primary,
+                      side: const BorderSide(color: KryptixColors.primary),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                       padding: const EdgeInsets.symmetric(vertical: 12),
                     ),
@@ -926,10 +926,10 @@ class _UnlockScreenState extends State<UnlockScreen> {
                   child: ElevatedButton(
                     onPressed: (isSaving || !acceptSeriousness) ? null : () async {
                       if (newPasswordController.text.isEmpty || confirmPasswordController.text.isEmpty) {
-                        VaultXToast.show(
+                        KryptixToast.show(
                           context,
                           message: 'Please complete both fields',
-                          type: VaultXToastType.warning,
+                          type: KryptixToastType.warning,
                         );
                         return;
                       }
@@ -946,24 +946,24 @@ class _UnlockScreenState extends State<UnlockScreen> {
                         setDialogState(() => isSaving = false);
                         if (result.success) {
                           Navigator.pop(ctx);
-                          VaultXToast.show(
+                          KryptixToast.show(
                             context,
                             message: 'Vault recovered and password updated!',
-                            type: VaultXToastType.success,
+                            type: KryptixToastType.success,
                           );
                           widget.onUnlockSuccess?.call();
                         } else {
-                          VaultXToast.show(
+                          KryptixToast.show(
                             context,
                             message: result.message,
-                            type: VaultXToastType.error,
+                            type: KryptixToastType.error,
                           );
                         }
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: VaultXColors.primary,
-                      foregroundColor: VaultXColors.onPrimary,
+                      backgroundColor: KryptixColors.primary,
+                      foregroundColor: KryptixColors.onPrimary,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                       padding: const EdgeInsets.symmetric(vertical: 12),
                     ),
@@ -990,7 +990,7 @@ class _UnlockScreenState extends State<UnlockScreen> {
       builder: (ctx) => AlertDialog(
         title: const Row(
           children: [
-            Icon(Icons.warning_amber_rounded, color: VaultXColors.error),
+            Icon(Icons.warning_amber_rounded, color: KryptixColors.error),
             SizedBox(width: 8),
             Text('Reset Entire Vault?'),
           ],
@@ -1013,27 +1013,27 @@ class _UnlockScreenState extends State<UnlockScreen> {
                 widget.authController.lockVault();
                 
                 if (mounted) {
-                  VaultXToast.show(
+                  KryptixToast.show(
                     context,
                     message: 'Vault successfully reset.',
-                    type: VaultXToastType.success,
+                    type: KryptixToastType.success,
                   );
                   widget.onVaultReset?.call();
                 }
               } catch (e) {
                 if (mounted) {
                   setState(() => isLoading = false);
-                  VaultXToast.show(
+                  KryptixToast.show(
                     context,
                     message: 'Failed to reset vault: $e',
-                    type: VaultXToastType.error,
+                    type: KryptixToastType.error,
                   );
                 }
               }
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: VaultXColors.error,
-              foregroundColor: VaultXColors.onError,
+              backgroundColor: KryptixColors.error,
+              foregroundColor: KryptixColors.onError,
             ),
             child: const Text('RESET EVERYTHING'),
           ),
@@ -1050,10 +1050,10 @@ class _UnlockScreenState extends State<UnlockScreen> {
 
   Future<void> _unlockVault() async {
     if (passwordController.text.isEmpty) {
-      VaultXToast.show(
+      KryptixToast.show(
         context,
         message: 'Please enter your master password',
-        type: VaultXToastType.warning,
+        type: KryptixToastType.warning,
       );
       return;
     }
@@ -1071,27 +1071,27 @@ class _UnlockScreenState extends State<UnlockScreen> {
         setState(() => isLoading = false);
 
         if (result.success) {
-          VaultXToast.show(
+          KryptixToast.show(
             context,
             message: 'Vault unlocked!',
-            type: VaultXToastType.success,
+            type: KryptixToastType.success,
           );
           widget.onUnlockSuccess?.call();
         } else {
-          VaultXToast.show(
+          KryptixToast.show(
             context,
             message: result.message,
-            type: VaultXToastType.error,
+            type: KryptixToastType.error,
           );
         }
       }
     } catch (e) {
       setState(() => isLoading = false);
       if (mounted) {
-        VaultXToast.show(
+        KryptixToast.show(
           context,
           message: 'Error during unlock: $e',
-          type: VaultXToastType.error,
+          type: KryptixToastType.error,
         );
       }
     }
@@ -1111,27 +1111,27 @@ class _UnlockScreenState extends State<UnlockScreen> {
         setState(() => isLoading = false);
 
         if (biometricResult.success) {
-          VaultXToast.show(
+          KryptixToast.show(
             context,
             message: 'Vault unlocked with biometric!',
-            type: VaultXToastType.success,
+            type: KryptixToastType.success,
           );
           widget.onUnlockSuccess?.call();
         } else {
-          VaultXToast.show(
+          KryptixToast.show(
             context,
             message: biometricResult.message,
-            type: VaultXToastType.error,
+            type: KryptixToastType.error,
           );
         }
       }
     } catch (e) {
       setState(() => isLoading = false);
       if (mounted) {
-        VaultXToast.show(
+        KryptixToast.show(
           context,
           message: 'Biometric auth error: $e',
-          type: VaultXToastType.error,
+          type: KryptixToastType.error,
         );
       }
     }
@@ -1139,7 +1139,7 @@ class _UnlockScreenState extends State<UnlockScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return VaultXBackground(
+    return KryptixBackground(
       child: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -1161,7 +1161,7 @@ class _UnlockScreenState extends State<UnlockScreen> {
               Text(
                 'High-level encryption active',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: VaultXColors.onSurfaceVariant.withOpacity(0.6),
+                      color: KryptixColors.onSurfaceVariant.withOpacity(0.6),
                     ),
               ),
               const SizedBox(height: 32),
@@ -1177,11 +1177,11 @@ class _UnlockScreenState extends State<UnlockScreen> {
                           height: 64,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: VaultXColors.primary.withOpacity(0.1),
-                            border: Border.all(color: VaultXColors.primary.withOpacity(0.2)),
+                            color: KryptixColors.primary.withOpacity(0.1),
+                            border: Border.all(color: KryptixColors.primary.withOpacity(0.2)),
                           ),
                         ),
-                        const Icon(Icons.lock_outline, size: 36, color: VaultXColors.primary),
+                        const Icon(Icons.lock_outline, size: 36, color: KryptixColors.primary),
                       ],
                     ),
                     const SizedBox(height: 24),
@@ -1190,7 +1190,7 @@ class _UnlockScreenState extends State<UnlockScreen> {
                     Text(
                       'Enter your master password to continue',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: VaultXColors.onSurfaceVariant.withOpacity(0.7),
+                            color: KryptixColors.onSurfaceVariant.withOpacity(0.7),
                           ),
                     ),
                     const SizedBox(height: 28),
@@ -1199,7 +1199,7 @@ class _UnlockScreenState extends State<UnlockScreen> {
                       child: Text(
                         'MASTER PASSWORD',
                         style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                              color: VaultXColors.primary,
+                              color: KryptixColors.primary,
                               letterSpacing: 1.2,
                             ),
                       ),
@@ -1232,9 +1232,9 @@ class _UnlockScreenState extends State<UnlockScreen> {
                           : Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text('Unlock Vault', style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold, color: VaultXColors.onPrimary)),
+                                Text('Unlock Vault', style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold, color: KryptixColors.onPrimary)),
                                 const SizedBox(width: 8),
-                                const Icon(Icons.arrow_forward, size: 20, color: VaultXColors.onPrimary),
+                                const Icon(Icons.arrow_forward, size: 20, color: KryptixColors.onPrimary),
                               ],
                             ),
                     ),
@@ -1249,10 +1249,10 @@ class _UnlockScreenState extends State<UnlockScreen> {
                     const SizedBox(height: 24),
                     TextButton.icon(
                       onPressed: isLoading ? null : _handleResetVaultRequest,
-                      icon: const Icon(Icons.delete_forever_outlined, color: VaultXColors.error, size: 16),
+                      icon: const Icon(Icons.delete_forever_outlined, color: KryptixColors.error, size: 16),
                       label: const Text(
                         'RESET VAULT',
-                        style: TextStyle(color: VaultXColors.error, fontWeight: FontWeight.bold, fontSize: 11),
+                        style: TextStyle(color: KryptixColors.error, fontWeight: FontWeight.bold, fontSize: 11),
                       ),
                     ),
                   ],
@@ -1271,7 +1271,7 @@ class _UnlockScreenState extends State<UnlockScreen> {
                     ),
                   ),
                   const SizedBox(width: 6),
-                  Text('AES-256', style: Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 10, color: VaultXColors.onSurfaceVariant.withOpacity(0.5))),
+                  Text('AES-256', style: Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 10, color: KryptixColors.onSurfaceVariant.withOpacity(0.5))),
                   const SizedBox(width: 20),
                   Container(
                     width: 6,
@@ -1282,7 +1282,7 @@ class _UnlockScreenState extends State<UnlockScreen> {
                     ),
                   ),
                   const SizedBox(width: 6),
-                  Text('Zero-Knowledge', style: Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 10, color: VaultXColors.onSurfaceVariant.withOpacity(0.5))),
+                  Text('Zero-Knowledge', style: Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 10, color: KryptixColors.onSurfaceVariant.withOpacity(0.5))),
                 ],
               ),
             ],
@@ -1335,7 +1335,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       ),
     ];
     return Scaffold(
-      backgroundColor: VaultXColors.background,
+      backgroundColor: KryptixColors.background,
       body: Column(
         children: [
           _buildHeader(context),
@@ -1380,11 +1380,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             setState(() {});
                             if (context.mounted) {
                               Navigator.pop(context);
-                              VaultXToast.show(context, message: 'Password saved successfully', type: VaultXToastType.success);
+                              KryptixToast.show(context, message: 'Password saved successfully', type: KryptixToastType.success);
                             }
                           } catch (e) {
                             if (context.mounted) {
-                              VaultXToast.show(context, message: 'Failed to save vault: $e', type: VaultXToastType.error);
+                              KryptixToast.show(context, message: 'Failed to save vault: $e', type: KryptixToastType.error);
                             }
                           }
                         },
@@ -1392,8 +1392,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     ),
                   );
                 },
-                backgroundColor: VaultXColors.primary,
-                foregroundColor: VaultXColors.onPrimary,
+                backgroundColor: KryptixColors.primary,
+                foregroundColor: KryptixColors.onPrimary,
                 shape: const CircleBorder(),
                 elevation: 0,
                 child: Container(
@@ -1403,7 +1403,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
-                        color: VaultXColors.primary.withOpacity(0.3),
+                        color: KryptixColors.primary.withOpacity(0.3),
                         blurRadius: 15,
                         spreadRadius: 2,
                       ),
@@ -1459,7 +1459,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         right: 12,
       ),
       decoration: BoxDecoration(
-        color: VaultXColors.surfaceContainerLowest, // Premium solid lowest dark background
+        color: KryptixColors.surfaceContainerLowest, // Premium solid lowest dark background
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(16),
           topRight: Radius.circular(16),
@@ -1485,7 +1485,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   Widget _buildNavItem(int index, IconData outlineIcon, IconData filledIcon, String label) {
     final isActive = selectedIndex == index;
-    final color = isActive ? VaultXColors.primary : VaultXColors.onSurfaceVariant;
+    final color = isActive ? KryptixColors.primary : KryptixColors.onSurfaceVariant;
     
     return GestureDetector(
       onTap: () {
@@ -1500,7 +1500,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
         decoration: BoxDecoration(
-          color: isActive ? VaultXColors.primary.withOpacity(0.12) : Colors.transparent,
+          color: isActive ? KryptixColors.primary.withOpacity(0.12) : Colors.transparent,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Column(
@@ -1544,7 +1544,7 @@ class SecurityGaugePainter extends CustomPainter {
       ..strokeWidth = strokeWidth;
 
     final activePaint = Paint()
-      ..color = VaultXColors.primary
+      ..color = KryptixColors.primary
       ..style = PaintingStyle.stroke
       ..strokeWidth = strokeWidth
       ..strokeCap = StrokeCap.round;
@@ -1648,10 +1648,10 @@ class _EntriesTabState extends State<EntriesTab> {
       Clipboard.setData(const ClipboardData(text: ''));
     });
     
-    VaultXToast.show(
+    KryptixToast.show(
       context,
       message: 'Password copied to clipboard. Auto-clears in 30 seconds.',
-      type: VaultXToastType.success,
+      type: KryptixToastType.success,
     );
   }
 
@@ -1684,11 +1684,11 @@ class _EntriesTabState extends State<EntriesTab> {
               widget.onStateChange();
               if (context.mounted) {
                 Navigator.pop(context);
-                VaultXToast.show(context, message: 'Password saved successfully', type: VaultXToastType.success);
+                KryptixToast.show(context, message: 'Password saved successfully', type: KryptixToastType.success);
               }
             } catch (e) {
               if (context.mounted) {
-                VaultXToast.show(context, message: 'Failed to save vault: $e', type: VaultXToastType.error);
+                KryptixToast.show(context, message: 'Failed to save vault: $e', type: KryptixToastType.error);
               }
             }
           },
@@ -1728,11 +1728,11 @@ class _EntriesTabState extends State<EntriesTab> {
               widget.onStateChange();
               if (context.mounted) {
                 Navigator.pop(context);
-                VaultXToast.show(context, message: 'Password updated successfully', type: VaultXToastType.success);
+                KryptixToast.show(context, message: 'Password updated successfully', type: KryptixToastType.success);
               }
             } catch (e) {
               if (context.mounted) {
-                VaultXToast.show(context, message: 'Failed to save vault: $e', type: VaultXToastType.error);
+                KryptixToast.show(context, message: 'Failed to save vault: $e', type: KryptixToastType.error);
               }
             }
           },
@@ -1747,7 +1747,7 @@ class _EntriesTabState extends State<EntriesTab> {
       builder: (context) => AlertDialog(
         title: const Row(
           children: [
-            Icon(Icons.warning_amber_rounded, color: VaultXColors.error),
+            Icon(Icons.warning_amber_rounded, color: KryptixColors.error),
             SizedBox(width: 8),
             Text('Delete Entry'),
           ],
@@ -1768,17 +1768,17 @@ class _EntriesTabState extends State<EntriesTab> {
                 widget.onStateChange();
                 if (context.mounted) {
                   Navigator.pop(context);
-                  VaultXToast.show(context, message: 'Entry deleted', type: VaultXToastType.info);
+                  KryptixToast.show(context, message: 'Entry deleted', type: KryptixToastType.info);
                 }
               } catch (e) {
                 if (context.mounted) {
-                  VaultXToast.show(context, message: 'Failed to delete entry: $e', type: VaultXToastType.error);
+                  KryptixToast.show(context, message: 'Failed to delete entry: $e', type: KryptixToastType.error);
                 }
               }
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: VaultXColors.error,
-              foregroundColor: VaultXColors.onError,
+              backgroundColor: KryptixColors.error,
+              foregroundColor: KryptixColors.onError,
             ),
             child: const Text('DELETE'),
           ),
@@ -1792,7 +1792,7 @@ class _EntriesTabState extends State<EntriesTab> {
       final vaultJson = widget.vault.serializeVault();
       await FileManager.saveVaultToFile(vaultJson);
     } catch (e) {
-      VaultXToast.show(context, message: 'Failed to save vault: $e', type: VaultXToastType.error);
+      KryptixToast.show(context, message: 'Failed to save vault: $e', type: KryptixToastType.error);
     }
   }
 
@@ -1813,7 +1813,7 @@ class _EntriesTabState extends State<EntriesTab> {
               controller: searchController,
               decoration: InputDecoration(
                 hintText: 'Search secure vault...',
-                prefixIcon: const Icon(Icons.search, color: VaultXColors.outline, size: 20),
+                prefixIcon: const Icon(Icons.search, color: KryptixColors.outline, size: 20),
                 border: InputBorder.none,
                 enabledBorder: InputBorder.none,
                 focusedBorder: InputBorder.none,
@@ -1839,7 +1839,7 @@ class _EntriesTabState extends State<EntriesTab> {
                             'SECURITY HEALTH',
                             style: Theme.of(context).textTheme.labelSmall?.copyWith(
                                   letterSpacing: 1.5,
-                                  color: VaultXColors.outline,
+                                  color: KryptixColors.outline,
                                 ),
                           ),
                           const SizedBox(height: 8),
@@ -1850,14 +1850,14 @@ class _EntriesTabState extends State<EntriesTab> {
                               Text(
                                 '$health',
                                 style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                                      color: VaultXColors.primary,
+                                      color: KryptixColors.primary,
                                       height: 1,
                                     ),
                               ),
                               Text(
                                 '/100',
                                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                      color: VaultXColors.onSurfaceVariant.withOpacity(0.5),
+                                      color: KryptixColors.onSurfaceVariant.withOpacity(0.5),
                                     ),
                               ),
                             ],
@@ -1866,7 +1866,7 @@ class _EntriesTabState extends State<EntriesTab> {
                           Text(
                             health >= 80 ? 'Strong protection active' : 'Action recommended',
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                  color: VaultXColors.onSurfaceVariant,
+                                  color: KryptixColors.onSurfaceVariant,
                                 ),
                           ),
                         ],
@@ -1881,7 +1881,7 @@ class _EntriesTabState extends State<EntriesTab> {
                         child: Center(
                           child: Icon(
                             health >= 80 ? Icons.verified_user : Icons.warning_amber_rounded,
-                            color: VaultXColors.primary,
+                            color: KryptixColors.primary,
                             size: 26,
                           ),
                         ),
@@ -1900,7 +1900,7 @@ class _EntriesTabState extends State<EntriesTab> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Icon(Icons.storage_outlined, color: VaultXColors.primary, size: 24),
+                          const Icon(Icons.storage_outlined, color: KryptixColors.primary, size: 24),
                           const SizedBox(height: 16),
                           Text(
                             '$totalEntries',
@@ -1909,7 +1909,7 @@ class _EntriesTabState extends State<EntriesTab> {
                           const SizedBox(height: 2),
                           Text(
                             'Stored Entries',
-                            style: Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 10, color: VaultXColors.outline),
+                            style: Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 10, color: KryptixColors.outline),
                           ),
                         ],
                       ),
@@ -1920,13 +1920,13 @@ class _EntriesTabState extends State<EntriesTab> {
                     child: GlassCard(
                       padding: const EdgeInsets.all(16),
                       borderRadius: BorderRadius.circular(16),
-                      borderColor: weakCount > 0 ? VaultXColors.error.withOpacity(0.2) : null,
+                      borderColor: weakCount > 0 ? KryptixColors.error.withOpacity(0.2) : null,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Icon(
                             Icons.warning_amber_rounded,
-                            color: weakCount > 0 ? VaultXColors.error : VaultXColors.outline,
+                            color: weakCount > 0 ? KryptixColors.error : KryptixColors.outline,
                             size: 24,
                           ),
                           const SizedBox(height: 16),
@@ -1935,13 +1935,13 @@ class _EntriesTabState extends State<EntriesTab> {
                             style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                                   fontSize: 22,
                                   fontWeight: FontWeight.bold,
-                                  color: weakCount > 0 ? VaultXColors.error : null,
+                                  color: weakCount > 0 ? KryptixColors.error : null,
                                 ),
                           ),
                           const SizedBox(height: 2),
                           Text(
                             'Weak Warnings',
-                            style: Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 10, color: VaultXColors.outline),
+                            style: Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 10, color: KryptixColors.outline),
                           ),
                         ],
                       ),
@@ -1957,13 +1957,13 @@ class _EntriesTabState extends State<EntriesTab> {
                     'RECENT PASSWORDS',
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
                           letterSpacing: 1.5,
-                          color: VaultXColors.outline,
+                          color: KryptixColors.outline,
                         ),
                   ),
                   if (filteredEntries.isNotEmpty)
                     Text(
                       '${filteredEntries.length} Items',
-                      style: Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 10, color: VaultXColors.outline),
+                      style: Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 10, color: KryptixColors.outline),
                     ),
                 ],
               ),
@@ -1972,11 +1972,11 @@ class _EntriesTabState extends State<EntriesTab> {
                   ? Column(
                       children: [
                         const SizedBox(height: 48),
-                        Icon(Icons.lock_open_outlined, size: 48, color: VaultXColors.outline.withOpacity(0.5)),
+                        Icon(Icons.lock_open_outlined, size: 48, color: KryptixColors.outline.withOpacity(0.5)),
                         const SizedBox(height: 12),
                         Text(
                           'No credentials found',
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: VaultXColors.outline),
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: KryptixColors.outline),
                         ),
                         const SizedBox(height: 16),
                         if (widget.vault.entries.isEmpty)
@@ -1985,8 +1985,8 @@ class _EntriesTabState extends State<EntriesTab> {
                             icon: const Icon(Icons.add, size: 18),
                             label: const Text('ADD PASSWORD'),
                             style: OutlinedButton.styleFrom(
-                              foregroundColor: VaultXColors.primary,
-                              side: const BorderSide(color: VaultXColors.primary),
+                              foregroundColor: KryptixColors.primary,
+                              side: const BorderSide(color: KryptixColors.primary),
                             ),
                           ),
                       ],
@@ -2004,14 +2004,14 @@ class _EntriesTabState extends State<EntriesTab> {
                           child: GlassCard(
                             padding: const EdgeInsets.all(12),
                             borderRadius: BorderRadius.circular(12),
-                            borderColor: isWeak ? VaultXColors.error.withOpacity(0.15) : null,
+                            borderColor: isWeak ? KryptixColors.error.withOpacity(0.15) : null,
                             child: Row(
                               children: [
                                 Container(
                                   width: 42,
                                   height: 42,
                                   decoration: BoxDecoration(
-                                    color: VaultXColors.surfaceContainerHigh,
+                                    color: KryptixColors.surfaceContainerHigh,
                                     borderRadius: BorderRadius.circular(8),
                                     border: Border.all(color: Colors.white.withOpacity(0.05)),
                                   ),
@@ -2019,7 +2019,7 @@ class _EntriesTabState extends State<EntriesTab> {
                                     child: Text(
                                       entry.siteName.isNotEmpty ? entry.siteName[0].toUpperCase() : '?',
                                       style: const TextStyle(
-                                        color: VaultXColors.primary,
+                                        color: KryptixColors.primary,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 18,
                                       ),
@@ -2046,19 +2046,19 @@ class _EntriesTabState extends State<EntriesTab> {
                                               margin: const EdgeInsets.only(left: 8),
                                               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                                               decoration: BoxDecoration(
-                                                color: VaultXColors.error.withOpacity(0.12),
+                                                color: KryptixColors.error.withOpacity(0.12),
                                                 borderRadius: BorderRadius.circular(4),
-                                                border: Border.all(color: VaultXColors.error.withOpacity(0.25), width: 0.5),
+                                                border: Border.all(color: KryptixColors.error.withOpacity(0.25), width: 0.5),
                                               ),
                                               child: Row(
                                                 mainAxisSize: MainAxisSize.min,
                                                 children: [
-                                                  const Icon(Icons.warning_amber_rounded, color: VaultXColors.error, size: 10),
+                                                  const Icon(Icons.warning_amber_rounded, color: KryptixColors.error, size: 10),
                                                   const SizedBox(width: 3),
                                                   Text(
                                                     'WEAK',
                                                     style: TextStyle(
-                                                      color: VaultXColors.error,
+                                                      color: KryptixColors.error,
                                                       fontSize: 8,
                                                       fontWeight: FontWeight.bold,
                                                       letterSpacing: 0.5,
@@ -2072,7 +2072,7 @@ class _EntriesTabState extends State<EntriesTab> {
                                       Text(
                                         entry.username,
                                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                              color: VaultXColors.onSurfaceVariant.withOpacity(0.7),
+                                              color: KryptixColors.onSurfaceVariant.withOpacity(0.7),
                                             ),
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
@@ -2087,7 +2087,7 @@ class _EntriesTabState extends State<EntriesTab> {
                                     Text(
                                       '••••••••',
                                       style: TextStyle(
-                                        color: isWeak ? VaultXColors.error.withOpacity(0.5) : VaultXColors.primary.withOpacity(0.5),
+                                        color: isWeak ? KryptixColors.error.withOpacity(0.5) : KryptixColors.primary.withOpacity(0.5),
                                         fontFamily: 'JetBrainsMono',
                                         fontSize: 14,
                                         letterSpacing: 1.5,
@@ -2112,7 +2112,7 @@ class _EntriesTabState extends State<EntriesTab> {
                                         ),
                                         const SizedBox(width: 12),
                                         IconButton(
-                                          icon: const Icon(Icons.delete_outline, size: 18, color: VaultXColors.error),
+                                          icon: const Icon(Icons.delete_outline, size: 18, color: KryptixColors.error),
                                           onPressed: () => _showDeleteConfirmation(entry),
                                           padding: EdgeInsets.zero,
                                           constraints: const BoxConstraints(),
@@ -2173,13 +2173,13 @@ class _GeneratorTabState extends State<GeneratorTab> {
         generatedPassword = password;
       });
     } catch (e) {
-      VaultXToast.show(context, message: 'Error generating password: $e', type: VaultXToastType.error);
+      KryptixToast.show(context, message: 'Error generating password: $e', type: KryptixToastType.error);
     }
   }
 
   void _copyToClipboard() {
     if (generatedPassword.isEmpty) {
-      VaultXToast.show(context, message: 'Generate a password first', type: VaultXToastType.warning);
+      KryptixToast.show(context, message: 'Generate a password first', type: KryptixToastType.warning);
       return;
     }
     Clipboard.setData(ClipboardData(text: generatedPassword));
@@ -2188,10 +2188,10 @@ class _GeneratorTabState extends State<GeneratorTab> {
       Clipboard.setData(const ClipboardData(text: ''));
     });
     
-    VaultXToast.show(
+    KryptixToast.show(
       context,
       message: 'Password copied to clipboard. Auto-clears in 30 seconds.',
-      type: VaultXToastType.success,
+      type: KryptixToastType.success,
     );
   }
 
@@ -2257,7 +2257,7 @@ class _GeneratorTabState extends State<GeneratorTab> {
         Text(
           'Create unbreakable security keys.',
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: VaultXColors.onSurfaceVariant.withOpacity(0.6),
+                color: KryptixColors.onSurfaceVariant.withOpacity(0.6),
               ),
         ),
         const SizedBox(height: 24),
@@ -2271,7 +2271,7 @@ class _GeneratorTabState extends State<GeneratorTab> {
                 children: [
                   Text(
                     'SECURE OUTPUT',
-                    style: Theme.of(context).textTheme.labelSmall?.copyWith(letterSpacing: 1.5, color: VaultXColors.primary),
+                    style: Theme.of(context).textTheme.labelSmall?.copyWith(letterSpacing: 1.5, color: KryptixColors.primary),
                   ),
                   Row(
                     children: [
@@ -2309,7 +2309,7 @@ class _GeneratorTabState extends State<GeneratorTab> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('Strength', style: TextStyle(fontSize: 12, color: VaultXColors.onSurfaceVariant)),
+                  const Text('Strength', style: TextStyle(fontSize: 12, color: KryptixColors.onSurfaceVariant)),
                   Text(label, style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: strengthColor)),
                 ],
               ),
@@ -2344,11 +2344,11 @@ class _GeneratorTabState extends State<GeneratorTab> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('LENGTH', style: Theme.of(context).textTheme.labelSmall?.copyWith(letterSpacing: 1.5, color: VaultXColors.outline)),
+            Text('LENGTH', style: Theme.of(context).textTheme.labelSmall?.copyWith(letterSpacing: 1.5, color: KryptixColors.outline)),
             Text(
               '$passwordLength',
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    color: VaultXColors.primary,
+                    color: KryptixColors.primary,
                     fontWeight: FontWeight.bold,
                   ),
             ),
@@ -2389,8 +2389,8 @@ class _GeneratorTabState extends State<GeneratorTab> {
         const SizedBox(height: 24),
         ElevatedButton.icon(
           onPressed: _copyToClipboard,
-          icon: const Icon(Icons.content_copy_outlined, size: 20, color: VaultXColors.onPrimary),
-          label: Text('Copy Password', style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold, color: VaultXColors.onPrimary)),
+          icon: const Icon(Icons.content_copy_outlined, size: 20, color: KryptixColors.onPrimary),
+          label: Text('Copy Password', style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold, color: KryptixColors.onPrimary)),
         ),
         const SizedBox(height: 32),
       ],
@@ -2406,7 +2406,7 @@ class _GeneratorTabState extends State<GeneratorTab> {
         children: [
           Row(
             children: [
-              Icon(icon, color: VaultXColors.onSurfaceVariant, size: 20),
+              Icon(icon, color: KryptixColors.onSurfaceVariant, size: 20),
               const SizedBox(width: 12),
               Text(label, style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 14)),
             ],
@@ -2482,7 +2482,7 @@ class _SettingsTabState extends State<SettingsTab> {
           });
           widget.authController.authState.setAutoLockMinutes(val);
           Navigator.pop(context);
-          VaultXToast.show(context, message: 'Auto-lock updated to $label', type: VaultXToastType.success);
+          KryptixToast.show(context, message: 'Auto-lock updated to $label', type: KryptixToastType.success);
         }
       },
     );
@@ -2516,7 +2516,7 @@ class _SettingsTabState extends State<SettingsTab> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Import Vault'),
-        content: const Text('Select a VaultX export file (.vlt) to import and merge records.'),
+        content: const Text('Select a Kryptix export file (.vlt) to import and merge records.'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
@@ -2576,7 +2576,7 @@ class _SettingsTabState extends State<SettingsTab> {
       if (!mounted) return;
 
       if (!result.success) {
-        VaultXToast.show(context, message: result.message, type: VaultXToastType.error);
+        KryptixToast.show(context, message: result.message, type: KryptixToastType.error);
         return;
       }
 
@@ -2592,20 +2592,20 @@ class _SettingsTabState extends State<SettingsTab> {
       if (!mounted) return;
 
       if (!saveResult.success) {
-        VaultXToast.show(context, message: saveResult.message, type: VaultXToastType.error);
+        KryptixToast.show(context, message: saveResult.message, type: KryptixToastType.error);
         return;
       }
 
       await Share.shareXFiles(
         [XFile(tempFile)],
-        subject: 'VaultX Backup',
+        subject: 'Kryptix Backup',
       );
       if (!mounted) return;
 
-      VaultXToast.show(context, message: 'Vault exported successfully', type: VaultXToastType.success);
+      KryptixToast.show(context, message: 'Vault exported successfully', type: KryptixToastType.success);
     } catch (e) {
       if (mounted) {
-        VaultXToast.show(context, message: 'Export failed: $e', type: VaultXToastType.error);
+        KryptixToast.show(context, message: 'Export failed: $e', type: KryptixToastType.error);
       }
     }
   }
@@ -2622,7 +2622,7 @@ class _SettingsTabState extends State<SettingsTab> {
       }
     } catch (e) {
       if (mounted) {
-        VaultXToast.show(context, message: 'Failed to pick file: $e', type: VaultXToastType.error);
+        KryptixToast.show(context, message: 'Failed to pick file: $e', type: KryptixToastType.error);
       }
     }
   }
@@ -2643,7 +2643,7 @@ class _SettingsTabState extends State<SettingsTab> {
                   _showImportPasswordDialog(filePath, MergeStrategy.keepExisting);
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: VaultXColors.surfaceContainerHigh,
+                  backgroundColor: KryptixColors.surfaceContainerHigh,
                   foregroundColor: Colors.white,
                 ),
                 child: const Text('KEEP EXISTING'),
@@ -2655,7 +2655,7 @@ class _SettingsTabState extends State<SettingsTab> {
                   _showImportPasswordDialog(filePath, MergeStrategy.keepBoth);
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: VaultXColors.surfaceContainerHigh,
+                  backgroundColor: KryptixColors.surfaceContainerHigh,
                   foregroundColor: Colors.white,
                 ),
                 child: const Text('KEEP BOTH'),
@@ -2667,7 +2667,7 @@ class _SettingsTabState extends State<SettingsTab> {
                   _showImportPasswordDialog(filePath, MergeStrategy.overwrite);
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: VaultXColors.errorContainer,
+                  backgroundColor: KryptixColors.errorContainer,
                   foregroundColor: Colors.white,
                 ),
                 child: const Text('OVERWRITE CONFLICTS'),
@@ -2717,7 +2717,7 @@ class _SettingsTabState extends State<SettingsTab> {
       if (!mounted) return;
 
       if (!loadResult.success) {
-        VaultXToast.show(context, message: loadResult.message, type: VaultXToastType.error);
+        KryptixToast.show(context, message: loadResult.message, type: KryptixToastType.error);
         return;
       }
 
@@ -2729,7 +2729,7 @@ class _SettingsTabState extends State<SettingsTab> {
       if (!mounted) return;
 
       if (!mergeResult.success) {
-        VaultXToast.show(context, message: mergeResult.message, type: VaultXToastType.error);
+        KryptixToast.show(context, message: mergeResult.message, type: KryptixToastType.error);
         return;
       }
 
@@ -2737,14 +2737,14 @@ class _SettingsTabState extends State<SettingsTab> {
       if (!mounted) return;
       widget.onStateChange();
 
-      VaultXToast.show(
+      KryptixToast.show(
         context,
         message: 'Imported successfully: ${mergeResult.mergeStats?.mergedCount ?? 0} records merged.',
-        type: VaultXToastType.success,
+        type: KryptixToastType.success,
       );
     } catch (e) {
       if (mounted) {
-        VaultXToast.show(context, message: 'Import failed: $e', type: VaultXToastType.error);
+        KryptixToast.show(context, message: 'Import failed: $e', type: KryptixToastType.error);
       }
     }
   }
@@ -2850,8 +2850,8 @@ class _SettingsTabState extends State<SettingsTab> {
                     widget.onStateChange();
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: VaultXColors.primary,
-                    foregroundColor: VaultXColors.onPrimary,
+                    backgroundColor: KryptixColors.primary,
+                    foregroundColor: KryptixColors.onPrimary,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                   ),
                   child: const Text('OK, LOCK & ACTIVATE'),
@@ -2860,12 +2860,12 @@ class _SettingsTabState extends State<SettingsTab> {
             ),
           );
         } else {
-          VaultXToast.show(context, message: result.message, type: VaultXToastType.error);
+          KryptixToast.show(context, message: result.message, type: KryptixToastType.error);
         }
       }
     } catch (e) {
       if (mounted) {
-        VaultXToast.show(context, message: 'Failed to change password: $e', type: VaultXToastType.error);
+        KryptixToast.show(context, message: 'Failed to change password: $e', type: KryptixToastType.error);
       }
     }
   }
@@ -2876,7 +2876,7 @@ class _SettingsTabState extends State<SettingsTab> {
       builder: (ctx) => AlertDialog(
         title: const Row(
           children: [
-            Icon(Icons.warning_amber_rounded, color: VaultXColors.error),
+            Icon(Icons.warning_amber_rounded, color: KryptixColors.error),
             SizedBox(width: 8),
             Text('Delete Vault?'),
           ],
@@ -2900,16 +2900,16 @@ class _SettingsTabState extends State<SettingsTab> {
                 widget.onStateChange();
                 widget.onVaultReset?.call();
                 
-                VaultXToast.show(context, message: 'Vault deleted completely.', type: VaultXToastType.info);
+                KryptixToast.show(context, message: 'Vault deleted completely.', type: KryptixToastType.info);
               } catch (e) {
                 if (mounted) {
-                  VaultXToast.show(context, message: 'Failed to delete vault: $e', type: VaultXToastType.error);
+                  KryptixToast.show(context, message: 'Failed to delete vault: $e', type: KryptixToastType.error);
                 }
               }
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: VaultXColors.error,
-              foregroundColor: VaultXColors.onError,
+              backgroundColor: KryptixColors.error,
+              foregroundColor: KryptixColors.onError,
             ),
             child: const Text('DELETE VAULT'),
           ),
@@ -2929,13 +2929,13 @@ class _SettingsTabState extends State<SettingsTab> {
         Text(
           'Manage app performance and security policies.',
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: VaultXColors.onSurfaceVariant.withOpacity(0.6),
+                color: KryptixColors.onSurfaceVariant.withOpacity(0.6),
               ),
         ),
         const SizedBox(height: 24),
         Text(
           'SECURITY',
-          style: Theme.of(context).textTheme.labelSmall?.copyWith(letterSpacing: 1.5, color: VaultXColors.outline),
+          style: Theme.of(context).textTheme.labelSmall?.copyWith(letterSpacing: 1.5, color: KryptixColors.outline),
         ),
         const SizedBox(height: 12),
         GlassCard(
@@ -2946,7 +2946,7 @@ class _SettingsTabState extends State<SettingsTab> {
               ListTile(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                 title: const Text('Auto-lock timer', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-                subtitle: Text('Vault locks after inactivity ($selectedAutoLockMinutes mins)', style: TextStyle(fontSize: 12, color: VaultXColors.onSurfaceVariant.withOpacity(0.7))),
+                subtitle: Text('Vault locks after inactivity ($selectedAutoLockMinutes mins)', style: TextStyle(fontSize: 12, color: KryptixColors.onSurfaceVariant.withOpacity(0.7))),
                 trailing: const Icon(Icons.chevron_right, size: 20),
                 onTap: _showAutoLockSelectionDialog,
               ),
@@ -2954,20 +2954,20 @@ class _SettingsTabState extends State<SettingsTab> {
               SwitchListTile(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                 title: const Text('Clear Clipboard', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-                subtitle: Text('Auto-purge sensitive strings after 30s', style: TextStyle(fontSize: 12, color: VaultXColors.onSurfaceVariant.withOpacity(0.7))),
+                subtitle: Text('Auto-purge sensitive strings after 30s', style: TextStyle(fontSize: 12, color: KryptixColors.onSurfaceVariant.withOpacity(0.7))),
                 value: isClearClipboardEnabled,
                 onChanged: (val) {
                   setState(() {
                     isClearClipboardEnabled = val;
                   });
-                  VaultXToast.show(context, message: val ? 'Clipboard auto-clear enabled' : 'Clipboard auto-clear disabled', type: VaultXToastType.info);
+                  KryptixToast.show(context, message: val ? 'Clipboard auto-clear enabled' : 'Clipboard auto-clear disabled', type: KryptixToastType.info);
                 },
               ),
               Divider(height: 1, color: Colors.white.withOpacity(0.05)),
               ListTile(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                 title: const Text('Change Master Password', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-                subtitle: Text('Update secure master validation key', style: TextStyle(fontSize: 12, color: VaultXColors.onSurfaceVariant.withOpacity(0.7))),
+                subtitle: Text('Update secure master validation key', style: TextStyle(fontSize: 12, color: KryptixColors.onSurfaceVariant.withOpacity(0.7))),
                 trailing: const Icon(Icons.chevron_right, size: 20),
                 onTap: _showChangePasswordDialog,
               ),
@@ -2977,7 +2977,7 @@ class _SettingsTabState extends State<SettingsTab> {
         const SizedBox(height: 24),
         Text(
           'DATA MANAGEMENT',
-          style: Theme.of(context).textTheme.labelSmall?.copyWith(letterSpacing: 1.5, color: VaultXColors.outline),
+          style: Theme.of(context).textTheme.labelSmall?.copyWith(letterSpacing: 1.5, color: KryptixColors.outline),
         ),
         const SizedBox(height: 12),
         GlassCard(
@@ -2987,37 +2987,37 @@ class _SettingsTabState extends State<SettingsTab> {
             children: [
               ListTile(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                leading: const Icon(Icons.file_download_outlined, color: VaultXColors.primary),
+                leading: const Icon(Icons.file_download_outlined, color: KryptixColors.primary),
                 title: const Text('Export Vault (.vlt)', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-                subtitle: Text('Package secure backup copy', style: TextStyle(fontSize: 12, color: VaultXColors.onSurfaceVariant.withOpacity(0.7))),
+                subtitle: Text('Package secure backup copy', style: TextStyle(fontSize: 12, color: KryptixColors.onSurfaceVariant.withOpacity(0.7))),
                 trailing: const Icon(Icons.download, size: 20),
                 onTap: _showExportDialog,
               ),
               Divider(height: 1, color: Colors.white.withOpacity(0.05)),
               ListTile(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                leading: const Icon(Icons.file_upload_outlined, color: VaultXColors.primary),
+                leading: const Icon(Icons.file_upload_outlined, color: KryptixColors.primary),
                 title: const Text('Import Vault (.vlt)', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-                subtitle: Text('Import secure backup copy', style: TextStyle(fontSize: 12, color: VaultXColors.onSurfaceVariant.withOpacity(0.7))),
+                subtitle: Text('Import secure backup copy', style: TextStyle(fontSize: 12, color: KryptixColors.onSurfaceVariant.withOpacity(0.7))),
                 trailing: const Icon(Icons.upload, size: 20),
                 onTap: _showImportDialog,
               ),
               Divider(height: 1, color: Colors.white.withOpacity(0.05)),
               ListTile(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                leading: const Icon(Icons.delete_forever_outlined, color: VaultXColors.error),
-                title: const Text('Delete Vault', style: TextStyle(color: VaultXColors.error, fontSize: 15, fontWeight: FontWeight.bold)),
-                subtitle: Text('Completely wipe credentials file', style: TextStyle(fontSize: 12, color: VaultXColors.onSurfaceVariant.withOpacity(0.7))),
+                leading: const Icon(Icons.delete_forever_outlined, color: KryptixColors.error),
+                title: const Text('Delete Vault', style: TextStyle(color: KryptixColors.error, fontSize: 15, fontWeight: FontWeight.bold)),
+                subtitle: Text('Completely wipe credentials file', style: TextStyle(fontSize: 12, color: KryptixColors.onSurfaceVariant.withOpacity(0.7))),
                 trailing: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                   decoration: BoxDecoration(
-                    color: VaultXColors.error.withOpacity(0.15),
+                    color: KryptixColors.error.withOpacity(0.15),
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: VaultXColors.error.withOpacity(0.3)),
+                    border: Border.all(color: KryptixColors.error.withOpacity(0.3)),
                   ),
                   child: const Text(
                     'IRREVERSIBLE',
-                    style: TextStyle(color: VaultXColors.error, fontSize: 8, fontWeight: FontWeight.bold),
+                    style: TextStyle(color: KryptixColors.error, fontSize: 8, fontWeight: FontWeight.bold),
                   ),
                 ),
                 onTap: _showDestructiveDeleteConfirmation,
@@ -3031,12 +3031,12 @@ class _SettingsTabState extends State<SettingsTab> {
             children: [
               Text(
                 'KRYPTIX VERSION 2.4.0-STABLE',
-                style: Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 10, color: VaultXColors.onSurfaceVariant.withOpacity(0.4)),
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 10, color: KryptixColors.onSurfaceVariant.withOpacity(0.4)),
               ),
               const SizedBox(height: 4),
               Text(
                 'END-TO-END ENCRYPTION ACTIVE',
-                style: Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 8, color: VaultXColors.onSurfaceVariant.withOpacity(0.3)),
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 8, color: KryptixColors.onSurfaceVariant.withOpacity(0.3)),
               ),
             ],
           ),
@@ -3178,10 +3178,10 @@ class _AddEntryDialogState extends State<_AddEntryDialog> {
                       if (siteNameController.text.isEmpty ||
                           usernameController.text.isEmpty ||
                           passwordController.text.isEmpty) {
-                        VaultXToast.show(
+                        KryptixToast.show(
                           context,
                           message: 'Please complete all required fields.',
-                          type: VaultXToastType.warning,
+                          type: KryptixToastType.warning,
                         );
                         return;
                       }
@@ -3336,10 +3336,10 @@ class _EditEntryDialogState extends State<_EditEntryDialog> {
                       if (siteNameController.text.isEmpty ||
                           usernameController.text.isEmpty ||
                           passwordController.text.isEmpty) {
-                        VaultXToast.show(
+                        KryptixToast.show(
                           context,
                           message: 'Please complete all required fields.',
-                          type: VaultXToastType.warning,
+                          type: KryptixToastType.warning,
                         );
                         return;
                       }

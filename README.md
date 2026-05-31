@@ -1,10 +1,10 @@
-# VaultX - Zero-Knowledge Password Manager
+# Kryptix - Zero-Knowledge Password Manager
 
-VaultX is a production-grade, fully offline password manager for Flutter with military-grade encryption. All data is encrypted locally on your device using AES-256-GCM. No backend servers, no internet connectivity required, no data leaves your device.
+Kryptix is a production-grade, fully offline password manager for Flutter with military-grade encryption. All data is encrypted locally on your device using AES-256-GCM. No backend servers, no internet connectivity required, no data leaves your device.
 
 ## ⚔️ Security
 
-- **Zero-Knowledge**: VaultX cannot access any user data
+- **Zero-Knowledge**: Kryptix cannot access any user data
 - **Military-Grade Encryption**: AES-256-GCM with fresh random nonce per entry
 - **Strong Key Derivation**: Argon2id with memory-hard parameters
 - **Integrity Verification**: HMAC-SHA256 prevents tampering
@@ -16,7 +16,7 @@ VaultX is a production-grade, fully offline password manager for Flutter with mi
 
 ## 🏗️ Architecture
 
-VaultX follows a strict modular architecture:
+Kryptix follows a strict modular architecture:
 
 - **core/crypto/**: Cryptographic primitives (AES-256-GCM, Argon2id, HMAC-SHA256)
 - **core/vault/**: Vault file operations and entry management
@@ -25,12 +25,12 @@ VaultX follows a strict modular architecture:
 - **features/**/**: UI screens and controllers
 - **shared/**: Reusable widgets and theme
 
-See [ARCHITECTURE.md](ARCHITECTURE.md) for complete system design.
+See [ARCHITECTURE.md](docs/ARCHITECTURE.md) for complete system design.
 
 ## 📋 Project Structure
 
 ```
-vaultx_app/
+kryptix_app/
 ├── lib/
 │   ├── core/
 │   │   ├── crypto/       # Encryption primitives
@@ -47,11 +47,13 @@ vaultx_app/
 │   ├── app.dart
 │   └── main.dart
 ├── test/
-├── ARCHITECTURE.md       # Full system design
-├── PROGRESS.md          # Phase tracking
-├── DECISIONS.md         # Technical decisions
-├── phase_N_report.md    # Phase completion reports
-└── *_notes.md           # Module documentation
+├── docs/                 # System documentation directory
+│   ├── ARCHITECTURE.md   # Full system design
+│   ├── PROGRESS.md       # Phase tracking and task status
+│   ├── DECISIONS.md      # Technical decisions log
+│   ├── phase_N_report.md # Phase-specific completion reports
+│   └── *_notes.md        # Cryptographic/Auth/UI module notes
+└── pubspec.yaml
 ```
 
 ## 🚀 Getting Started
@@ -65,8 +67,8 @@ vaultx_app/
 
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/vaultx.git
-cd vaultx_app
+git clone https://github.com/yourusername/kryptix.git
+cd kryptix_app
 
 # Install dependencies
 flutter pub get
@@ -105,18 +107,18 @@ flutter run
 
 ## 📚 Documentation
 
-- [ARCHITECTURE.md](ARCHITECTURE.md) - Complete system design and data flow
-- [PROGRESS.md](PROGRESS.md) - Phase tracking and task status
-- [DECISIONS.md](DECISIONS.md) - Technical decisions and rationale
-- [phase_*_report.md](./phase_1_report.md) - Phase-specific completion reports
-- [crypto_notes.md](./crypto_notes.md) - Cryptographic implementation details
-- [vault_notes.md](./vault_notes.md) - Vault operations documentation
-- [auth_notes.md](./auth_notes.md) - Authentication system documentation
-- [ui_notes.md](./ui_notes.md) - UI integration details
+- [ARCHITECTURE.md](docs/ARCHITECTURE.md) - Complete system design and data flow
+- [PROGRESS.md](docs/PROGRESS.md) - Phase tracking and task status
+- [DECISIONS.md](docs/DECISIONS.md) - Technical decisions and rationale
+- [phase_*_report.md](docs/phase_1_report.md) - Phase-specific completion reports
+- [crypto_notes.md](docs/crypto_notes.md) - Cryptographic implementation details
+- [vault_notes.md](docs/vault_notes.md) - Vault operations documentation
+- [auth_notes.md](docs/auth_notes.md) - Authentication system documentation
+- [ui_notes.md](docs/ui_notes.md) - UI integration details
 
 ## 🔒 Privacy
 
-VaultX respects your privacy completely:
+Kryptix respects your privacy completely:
 - No analytics or telemetry
 - No crash reporting
 - No backend servers
@@ -127,7 +129,7 @@ VaultX respects your privacy completely:
 
 ## 🛡️ Security Audit
 
-This application underwent comprehensive security audit. See [security_audit.md](./security_audit.md) for complete findings.
+This application underwent comprehensive security audit. See [security_audit.md](docs/security_audit.md) for complete findings.
 
 ## 📊 Development Phases
 
@@ -140,7 +142,7 @@ This application underwent comprehensive security audit. See [security_audit.md]
 7. **Phase 7**: UI Integration
 8. **Phase 8**: Security Audit and Hardening
 
-See [PROGRESS.md](PROGRESS.md) for detailed phase tracking.
+See [PROGRESS.md](docs/PROGRESS.md) for detailed phase tracking.
 
 ## 🧪 Testing
 
@@ -154,11 +156,11 @@ flutter test --coverage
 
 ## 📄 License
 
-VaultX is released under the MIT License. See LICENSE file for details.
+Kryptix is released under the MIT License. See LICENSE file for details.
 
 ## 🤝 Contributing
 
-Security contributions welcome. Please review [DECISIONS.md](DECISIONS.md) and [ARCHITECTURE.md](ARCHITECTURE.md) before submitting changes.
+Security contributions welcome. Please review [DECISIONS.md](docs/DECISIONS.md) and [ARCHITECTURE.md](docs/ARCHITECTURE.md) before submitting changes.
 
 ## ⚠️ Disclaimer
 
@@ -170,4 +172,4 @@ For issues, questions, or security concerns, please open an issue or contact the
 
 ---
 
-**VaultX** - Your passwords. Your device. Your control.
+**Kryptix** - Your passwords. Your device. Your control.

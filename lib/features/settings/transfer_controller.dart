@@ -1,5 +1,5 @@
-import 'package:vaultx/core/vault/vault_core.dart';
-import 'package:vaultx/core/vault/transfer.dart';
+import 'package:kryptix/core/vault/vault_core.dart';
+import 'package:kryptix/core/vault/transfer.dart';
 
 class TransferController {
   final VaultCore vault;

@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 import 'dart:convert';
 import 'package:pointycastle/export.dart';
-import 'package:vaultx/core/crypto/random.dart' as vault_random;
+import 'package:kryptix/core/crypto/random.dart' as vault_random;
 
 class AesGcm {
   static const int keyLength = 32;

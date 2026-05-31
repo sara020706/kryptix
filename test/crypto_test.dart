@@ -1,9 +1,9 @@
 import 'dart:typed_data';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vaultx/core/crypto/aes_gcm.dart';
-import 'package:vaultx/core/crypto/argon2.dart';
-import 'package:vaultx/core/crypto/hmac.dart';
-import 'package:vaultx/core/crypto/random.dart';
+import 'package:kryptix/core/crypto/aes_gcm.dart';
+import 'package:kryptix/core/crypto/argon2.dart';
+import 'package:kryptix/core/crypto/hmac.dart';
+import 'package:kryptix/core/crypto/random.dart';
 
 void main() {
   group('CryptoModule', () {

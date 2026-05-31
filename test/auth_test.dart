@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vaultx/core/auth/rate_limiter.dart';
-import 'package:vaultx/core/auth/auth_state.dart';
-import 'package:vaultx/core/vault/vault_core.dart';
+import 'package:kryptix/core/auth/rate_limiter.dart';
+import 'package:kryptix/core/auth/auth_state.dart';
+import 'package:kryptix/core/vault/vault_core.dart';
 
 void main() {
   group('AuthModule - RateLimiter', () {

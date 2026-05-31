@@ -2,11 +2,11 @@ import 'dart:typed_data';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class Keystore {
-  static const String _vaultKeyStorageKey = 'vaultx_wrapped_key';
-  static const String _vaultSaltStorageKey = 'vaultx_salt';
-  static const String _vaultArgon2StorageKey = 'vaultx_argon2_params';
+  static const String _vaultKeyStorageKey = 'kryptix_wrapped_key';
+  static const String _vaultSaltStorageKey = 'kryptix_salt';
+  static const String _vaultArgon2StorageKey = 'kryptix_argon2_params';
 
-  static const String _autoLockStorageKey = 'vaultx_auto_lock_minutes';
+  static const String _autoLockStorageKey = 'kryptix_auto_lock_minutes';
 
   final FlutterSecureStorage _storage;
 

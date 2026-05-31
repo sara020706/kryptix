@@ -1,10 +1,10 @@
-import 'package:vaultx/core/vault/vault_core.dart';
-import 'package:vaultx/core/auth/keystore.dart';
-import 'package:vaultx/core/auth/biometric.dart';
-import 'package:vaultx/core/auth/rate_limiter.dart';
-import 'package:vaultx/core/auth/auth_state.dart';
-import 'package:vaultx/core/storage/file_manager.dart';
-import 'package:vaultx/core/models/entry_model.dart';
+import 'package:kryptix/core/vault/vault_core.dart';
+import 'package:kryptix/core/auth/keystore.dart';
+import 'package:kryptix/core/auth/biometric.dart';
+import 'package:kryptix/core/auth/rate_limiter.dart';
+import 'package:kryptix/core/auth/auth_state.dart';
+import 'package:kryptix/core/storage/file_manager.dart';
+import 'package:kryptix/core/models/entry_model.dart';
 import 'dart:convert';
 
 class AuthController {

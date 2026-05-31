@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-/// VaultX Design System
+/// Kryptix Design System
 /// Based on the Modern-Industrial Glassmorphism reference
 /// Primary palette: Deep blacks (#131313) + Electric Blue-Lilac (#adc7ff)
-class VaultXColors {
+class KryptixColors {
   // Core background
   static const Color background = Color(0xFF131313);
   static const Color backgroundLowest = Color(0xFF0E0E0E);
@@ -55,7 +55,7 @@ class VaultXColors {
   static Color primaryGlow = const Color(0xFFadc7ff).withOpacity(0.25);
 }
 
-class VaultXTheme {
+class KryptixTheme {
   static TextTheme _buildTextTheme() {
     return TextTheme(
       // headline-lg: 28px, Inter 700, -0.02em
@@ -64,7 +64,7 @@ class VaultXTheme {
         fontWeight: FontWeight.w700,
         letterSpacing: -0.56,
         height: 34 / 28,
-        color: VaultXColors.onSurface,
+        color: KryptixColors.onSurface,
       ),
       // headline-md: 20px, Inter 600, -0.01em
       headlineMedium: GoogleFonts.inter(
@@ -72,21 +72,21 @@ class VaultXTheme {
         fontWeight: FontWeight.w600,
         letterSpacing: -0.2,
         height: 28 / 20,
-        color: VaultXColors.onSurface,
+        color: KryptixColors.onSurface,
       ),
       // body-lg: 16px, Inter 400
       bodyLarge: GoogleFonts.inter(
         fontSize: 16,
         fontWeight: FontWeight.w400,
         height: 24 / 16,
-        color: VaultXColors.onSurface,
+        color: KryptixColors.onSurface,
       ),
       // body-md: 14px, Inter 400
       bodyMedium: GoogleFonts.inter(
         fontSize: 14,
         fontWeight: FontWeight.w400,
         height: 20 / 14,
-        color: VaultXColors.onSurface,
+        color: KryptixColors.onSurface,
       ),
       // label-sm: 12px, Inter 600, 0.05em
       labelSmall: GoogleFonts.inter(
@@ -94,7 +94,7 @@ class VaultXTheme {
         fontWeight: FontWeight.w600,
         letterSpacing: 0.6,
         height: 16 / 12,
-        color: VaultXColors.onSurfaceVariant,
+        color: KryptixColors.onSurfaceVariant,
       ),
       // password-display: 18px, JetBrains Mono 500, 0.05em
       titleMedium: GoogleFonts.jetBrainsMono(
@@ -102,7 +102,7 @@ class VaultXTheme {
         fontWeight: FontWeight.w500,
         letterSpacing: 0.9,
         height: 24 / 18,
-        color: VaultXColors.onSurface,
+        color: KryptixColors.onSurface,
       ),
     );
   }
@@ -112,44 +112,44 @@ class VaultXTheme {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
-      scaffoldBackgroundColor: VaultXColors.background,
+      scaffoldBackgroundColor: KryptixColors.background,
       colorScheme: const ColorScheme.dark(
-        primary: VaultXColors.primary,
-        onPrimary: VaultXColors.onPrimary,
-        primaryContainer: VaultXColors.primaryContainer,
-        onPrimaryContainer: VaultXColors.onPrimaryContainer,
-        error: VaultXColors.error,
-        onError: VaultXColors.onError,
-        errorContainer: VaultXColors.errorContainer,
-        onErrorContainer: VaultXColors.onErrorContainer,
-        surface: VaultXColors.surface,
-        onSurface: VaultXColors.onSurface,
-        surfaceContainerHighest: VaultXColors.surfaceContainerHighest,
-        outline: VaultXColors.outline,
-        outlineVariant: VaultXColors.outlineVariant,
-        inverseSurface: VaultXColors.inverseSurface,
-        onInverseSurface: VaultXColors.inverseOnSurface,
-        inversePrimary: VaultXColors.inversePrimary,
+        primary: KryptixColors.primary,
+        onPrimary: KryptixColors.onPrimary,
+        primaryContainer: KryptixColors.primaryContainer,
+        onPrimaryContainer: KryptixColors.onPrimaryContainer,
+        error: KryptixColors.error,
+        onError: KryptixColors.onError,
+        errorContainer: KryptixColors.errorContainer,
+        onErrorContainer: KryptixColors.onErrorContainer,
+        surface: KryptixColors.surface,
+        onSurface: KryptixColors.onSurface,
+        surfaceContainerHighest: KryptixColors.surfaceContainerHighest,
+        outline: KryptixColors.outline,
+        outlineVariant: KryptixColors.outlineVariant,
+        inverseSurface: KryptixColors.inverseSurface,
+        onInverseSurface: KryptixColors.inverseOnSurface,
+        inversePrimary: KryptixColors.inversePrimary,
       ),
       textTheme: textTheme,
       // No AppBar in the new design — we use custom headers
       appBarTheme: AppBarTheme(
-        backgroundColor: VaultXColors.background.withOpacity(0.8),
-        foregroundColor: VaultXColors.primary,
+        backgroundColor: KryptixColors.background.withOpacity(0.8),
+        foregroundColor: KryptixColors.primary,
         elevation: 0,
         centerTitle: false,
         titleTextStyle: GoogleFonts.inter(
           fontSize: 20,
           fontWeight: FontWeight.w700,
-          color: VaultXColors.primary,
+          color: KryptixColors.primary,
           letterSpacing: -0.4,
         ),
       ),
       // Bottom nav styling
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: VaultXColors.surfaceContainerLowest,
-        selectedItemColor: VaultXColors.primary,
-        unselectedItemColor: VaultXColors.onSurfaceVariant,
+        backgroundColor: KryptixColors.surfaceContainerLowest,
+        selectedItemColor: KryptixColors.primary,
+        unselectedItemColor: KryptixColors.onSurfaceVariant,
         showSelectedLabels: true,
         showUnselectedLabels: true,
         selectedLabelStyle: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600),
@@ -160,8 +160,8 @@ class VaultXTheme {
       // Elevated buttons: primary filled with glow
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: VaultXColors.primary,
-          foregroundColor: VaultXColors.onPrimary,
+          backgroundColor: KryptixColors.primary,
+          foregroundColor: KryptixColors.onPrimary,
           minimumSize: const Size.fromHeight(52),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           textStyle: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600),
@@ -171,7 +171,7 @@ class VaultXTheme {
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
-          foregroundColor: VaultXColors.primary,
+          foregroundColor: KryptixColors.primary,
           textStyle: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, letterSpacing: 0.6),
           minimumSize: const Size(0, 40),
         ),
@@ -187,32 +187,32 @@ class VaultXTheme {
           borderSide: BorderSide(color: Colors.white.withOpacity(0.1), width: 2),
         ),
         focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: VaultXColors.primary, width: 2),
+          borderSide: BorderSide(color: KryptixColors.primary, width: 2),
         ),
         errorBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: VaultXColors.error, width: 2),
+          borderSide: BorderSide(color: KryptixColors.error, width: 2),
         ),
         focusedErrorBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: VaultXColors.error, width: 2),
+          borderSide: BorderSide(color: KryptixColors.error, width: 2),
         ),
         labelStyle: GoogleFonts.inter(
           fontSize: 12,
           fontWeight: FontWeight.w600,
           letterSpacing: 0.6,
-          color: VaultXColors.primary,
+          color: KryptixColors.primary,
         ),
         hintStyle: GoogleFonts.inter(
-          color: VaultXColors.onSurfaceVariant.withOpacity(0.3),
+          color: KryptixColors.onSurfaceVariant.withOpacity(0.3),
         ),
-        prefixIconColor: VaultXColors.outline,
-        suffixIconColor: VaultXColors.onSurfaceVariant,
+        prefixIconColor: KryptixColors.outline,
+        suffixIconColor: KryptixColors.onSurfaceVariant,
       ),
       // Slider
       sliderTheme: SliderThemeData(
-        activeTrackColor: VaultXColors.primary,
+        activeTrackColor: KryptixColors.primary,
         inactiveTrackColor: Colors.white.withOpacity(0.1),
-        thumbColor: VaultXColors.primary,
-        overlayColor: VaultXColors.primary.withOpacity(0.12),
+        thumbColor: KryptixColors.primary,
+        overlayColor: KryptixColors.primary.withOpacity(0.12),
         thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 10),
         trackHeight: 4,
       ),
@@ -220,28 +220,28 @@ class VaultXTheme {
       switchTheme: SwitchThemeData(
         thumbColor: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.selected)) {
-            return VaultXColors.onPrimary;
+            return KryptixColors.onPrimary;
           }
-          return VaultXColors.onSurfaceVariant;
+          return KryptixColors.onSurfaceVariant;
         }),
         trackColor: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.selected)) {
-            return VaultXColors.primary;
+            return KryptixColors.primary;
           }
-          return VaultXColors.surfaceContainerHighest;
+          return KryptixColors.surfaceContainerHighest;
         }),
       ),
       dialogTheme: DialogThemeData(
-        backgroundColor: VaultXColors.surfaceContainer,
+        backgroundColor: KryptixColors.surfaceContainer,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         titleTextStyle: GoogleFonts.inter(
           fontSize: 20,
           fontWeight: FontWeight.w600,
-          color: VaultXColors.onSurface,
+          color: KryptixColors.onSurface,
         ),
         contentTextStyle: GoogleFonts.inter(
           fontSize: 14,
-          color: VaultXColors.onSurfaceVariant,
+          color: KryptixColors.onSurfaceVariant,
           height: 1.5,
         ),
       ),
@@ -250,7 +250,7 @@ class VaultXTheme {
         thickness: 1,
         space: 0,
       ),
-      iconTheme: const IconThemeData(color: VaultXColors.onSurfaceVariant, size: 24),
+      iconTheme: const IconThemeData(color: KryptixColors.onSurfaceVariant, size: 24),
     );
   }
 
@@ -275,7 +275,7 @@ extension PasswordStrengthColor on String {
       case 'darkGreen':
         return const Color(0xFF43A047);
       default:
-        return VaultXColors.outline;
+        return KryptixColors.outline;
     }
   }
 }

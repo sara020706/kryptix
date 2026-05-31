@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vaultx/core/generator/password_generator.dart';
+import 'package:kryptix/core/generator/password_generator.dart';
 
 void main() {
   group('GeneratorModule', () {

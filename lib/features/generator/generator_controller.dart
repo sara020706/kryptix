@@ -1,4 +1,4 @@
-import 'package:vaultx/core/generator/password_generator.dart';
+import 'package:kryptix/core/generator/password_generator.dart';
 
 class GeneratorController {
   final PasswordGenerator _generator = PasswordGenerator();
